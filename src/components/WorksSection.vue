@@ -140,9 +140,10 @@ onBeforeUnmount(() => {
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 /* Smooth font rendering */
-h3, p {
+h3,
+p {
   font-family: inherit;
 }
 </style>

@@ -121,8 +121,11 @@ const clearActive = () => {
   </section>
 </template>
 
-<style scoped>
+
+<style lang="scss" scoped>
+
 span {
   display: inline-block;
 }
+
 </style>

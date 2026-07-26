@@ -159,7 +159,8 @@ const moveDragging = (e) => {
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+
 /* Hide scrollbar across browsers */
 .scrollbar-none::-webkit-scrollbar {
   display: none;
@@ -168,4 +169,5 @@ const moveDragging = (e) => {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 </style>

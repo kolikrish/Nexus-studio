@@ -58,8 +58,10 @@ const headlineText = "Selected\nworks*"
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+
 h1 {
   font-feature-settings: "kern" 1, "liga" 1;
 }
+
 </style>
