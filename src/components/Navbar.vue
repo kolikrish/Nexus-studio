@@ -6,12 +6,13 @@ const navItems = ref([
   { name: 'About,', href: '#about', active: true },
   { name: 'Playground', href: '#playground', active: false }
 ])
+
 </script>
 
 <template>
   <header class="w-full px-6 py-5 md:px-10 md:py-6 lg:px-12 flex justify-between items-center select-none text-sm md:text-base font-sans tracking-tight">
     <!-- Left: Brand / Name -->
-    <div class="font-bold text-black tracking-tight text-base md:text-lg">
+    <div class="font-light text-black tracking-tight text-base md:text-lg">
       <a href="/" class="hover:opacity-80 transition-opacity">Julien Pianetti</a>
     </div>
 
@@ -23,8 +24,8 @@ const navItems = ref([
         :href="item.href"
         :class="[
           item.active || item.name !== 'Work,'
-            ? 'text-black font-bold'
-            : 'text-neutral-400 font-semibold hover:text-black',
+            ? 'text-black font-medium'
+            : 'text-neutral-400 font-medium hover:text-black',
           'transition-colors duration-200 cursor-pointer'
         ]"
       >
@@ -33,7 +34,7 @@ const navItems = ref([
     </nav>
 
     <!-- Right: Contact Email -->
-    <div class="text-base md:text-[17px] font-bold text-black tracking-tight">
+    <div class="text-base md:text-[17px] font-medium text-black tracking-tight">
       <a href="mailto:jupian@gmail.com" class="hover:opacity-75 transition-opacity">jupian@gmail.com</a>
     </div>
   </header>

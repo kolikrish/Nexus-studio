@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+@font-face {
+  font-family: 'poppins';
+  src: url(./assets/font/Poppins-Medium.ttf);
 }
 
 body {
@@ -9,4 +10,8 @@ body {
   background-color: #ffffff;
   color: #000000;
   overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
