@@ -1,20 +1,73 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
 import heroVideo from '../assets/Hero-video.webm'
 import VariableProximity from './effect/VariableProximity.vue'
 
 const containerRef = ref(null)
+const videoRef = ref(null)
+const descRef = ref(null)
 const headlineText = "Selected\nworks*"
+
+const descriptionText = "Independent designer based in Dijon, France, I create custom digital interfaces. Developing on Webflow and passionate about motion design."
+const words = descriptionText.split(" ")
+
+onMounted(() => {
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+  // 1. Word-by-word reveal from top for description
+  if (descRef.value) {
+    const wordElements = descRef.value.querySelectorAll('.hero-word-inner')
+    tl.fromTo(
+      wordElements,
+      { y: '-100%', opacity: 0 },
+      { y: '0%', opacity: 1, duration: 0.6, stagger: 0.035 },
+      0.1
+    )
+  }
+
+  // 2. Main heading entrance from left side
+  if (containerRef.value) {
+    tl.fromTo(
+      containerRef.value,
+      { x: -120, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1.0 },
+      0.3
+    )
+  }
+
+  // 3. Video player entrance from right side
+  if (videoRef.value) {
+    tl.fromTo(
+      videoRef.value,
+      { x: 120, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1.0 },
+      0.3
+    )
+  }
+})
 </script>
 
 <template>
-  <section class="w-full px-6 md:px-10 lg:px-12 pt-6 lg:pt-12 pb-10 flex flex-col justify-between min-h-[calc(100vh-90px)] select-none">
+  <section class="w-full px-6 md:px-10 lg:px-12 pt-6 lg:pt-12 pb-10 flex flex-col justify-between min-h-[calc(100vh-90px)] select-none overflow-hidden">
     
     <!-- Top Row: Description Text (Positioned on the Right side) -->
     <div class="w-full flex justify-end mb-16 lg:mb-24">
       <div class="w-full lg:w-[62%] xl:w-[58%]">
-        <p data-cursor="text" class="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[44px] font-[poppins] text-light ">
-          Independent designer based in Dijon, France, I create custom digital interfaces. Developing on Webflow and passionate about motion design.
+        <p
+          ref="descRef"
+          data-cursor="text"
+          class="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[44px] font-[poppins] text-light flex flex-wrap gap-x-[0.28em] gap-y-1"
+        >
+          <span
+            v-for="(word, index) in words"
+            :key="index"
+            class="inline-block overflow-hidden py-1 -my-1"
+          >
+            <span class="hero-word-inner inline-block">
+              {{ word }}
+            </span>
+          </span>
         </p>
       </div>
     </div>
@@ -37,7 +90,7 @@ const headlineText = "Selected\nworks*"
       </div>
 
       <!-- Right Bottom Video Container -->
-      <div class="w-full lg:w-auto lg:min-w-[400px] xl:min-w-[480px] max-w-[460px] self-end mb-1 sm:mb-2 lg:mb-4">
+      <div ref="videoRef" class="w-full lg:w-auto lg:min-w-[400px] xl:min-w-[480px] max-w-[460px] self-end mb-1 sm:mb-2 lg:mb-4">
         <div data-cursor="view" class="relative w-full aspect-[20/10] bg-black overflow-hidden shadow-2xl rounded-xs">
           <video
             class="w-full h-full object-cover"

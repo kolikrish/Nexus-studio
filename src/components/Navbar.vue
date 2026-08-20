@@ -13,7 +13,7 @@ const navItems = ref([
   <header class="w-full px-6 py-5 md:px-10 md:py-6 lg:px-12 flex justify-between items-center select-none text-sm md:text-base font-sans tracking-tight">
     <!-- Left: Brand / Name -->
     <div class="font-light text-black tracking-tight text-base md:text-lg">
-      <a href="/" class="hover:opacity-80 transition-opacity">Julien Pianetti</a>
+      <a href="/" class="hover:opacity-80 transition-opacity">Nexus Product Studio</a>
     </div>
 
     <!-- Center: Navigation Links -->
@@ -35,7 +35,7 @@ const navItems = ref([
 
     <!-- Right: Contact Email -->
     <div class="text-base md:text-[17px] font-medium text-black tracking-tight">
-      <a href="mailto:jupian@gmail.com" class="hover:opacity-75 transition-opacity">jupian@gmail.com</a>
+      <a href="mailto:hello@nexusproduct.com" class="hover:opacity-75 transition-opacity">hello@nexusproduct.com</a>
     </div>
   </header>
 </template>

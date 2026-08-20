@@ -79,7 +79,7 @@ const scrollToTop = () => {
               </a>
             </li>
             <li>
-              <a href="mailto:jupian@gmail.com" class="hover:opacity-60 transition-opacity">Email</a>
+              <a href="mailto:hello@nexusproduct.com" class="hover:opacity-60 transition-opacity">Email</a>
             </li>
             <li>
               <a href="#" class="hover:opacity-60 transition-opacity inline-flex items-center gap-1">
@@ -95,10 +95,10 @@ const scrollToTop = () => {
             SAY HELLO
           </p>
           <a
-            href="mailto:jupian@gmail.com"
+            href="mailto:hello@nexusproduct.com"
             class="text-2xl sm:text-3xl lg:text-[38px] font-medium text-black tracking-tight hover:opacity-60 transition-opacity block mb-4 font-[poppins]"
           >
-            jupian@gmail.com
+            hello@nexusproduct.com
           </a>
 
           <!-- Status Indicator -->
@@ -114,7 +114,7 @@ const scrollToTop = () => {
     <!-- Bottom Footer Bar -->
     <div class="border-t border-neutral-200 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs md:text-sm font-light text-neutral-500 tracking-tight font-[poppins]">
       <div>
-        ©2026 Julien Pianetti — All rights reserved
+        ©2026 Nexus Product Studio — All rights reserved
       </div>
       <button
         @click="scrollToTop"

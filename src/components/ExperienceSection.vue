@@ -1,4 +1,49 @@
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import gsap from 'gsap'
+
+const statementRef = ref(null)
+const hasAnimated = ref(false)
+
+const statementText = "After 14 years of shaping web experiences, I've expanded my playground: from interface design to Webflow development, all the way to animation that brings projects to life."
+const statementWords = statementText.split(" ")
+
+let observer = null
+
+onMounted(() => {
+  if (!statementRef.value) return
+
+  const wordElements = statementRef.value.querySelectorAll('.word-inner')
+
+  // Set initial hidden state
+  gsap.set(wordElements, { y: '-100%', opacity: 0 })
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasAnimated.value) {
+          hasAnimated.value = true
+          gsap.to(wordElements, {
+            y: '0%',
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.03,
+            ease: 'power3.out',
+          })
+          observer.disconnect()
+        }
+      })
+    },
+    { threshold: 0.2 }
+  )
+
+  observer.observe(statementRef.value)
+})
+
+onBeforeUnmount(() => {
+  if (observer) observer.disconnect()
+})
+
 const experiences = [
   {
     number: '01',
@@ -44,8 +89,20 @@ const experiences = [
     
     <!-- Main Headline Statement -->
     <div class="w-full max-w-7xl mb-16 lg:mb-20">
-      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] xl:text-[40px] font-[poppins] text-black leading-[1.12] tracking-tight">
-        After 14 years of shaping web experiences, I've expanded my playground: from interface design to Webflow development, all the way to animation that brings projects to life.
+      <h2
+        ref="statementRef"
+        data-cursor="text"
+        class="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] xl:text-[40px] font-[poppins] text-black leading-[1.12] tracking-tight flex flex-wrap gap-x-[0.28em] gap-y-1.5"
+      >
+        <span
+          v-for="(word, index) in statementWords"
+          :key="index"
+          class="inline-block overflow-hidden py-1 -my-1"
+        >
+          <span class="word-inner inline-block">
+            {{ word }}
+          </span>
+        </span>
       </h2>
     </div>
 

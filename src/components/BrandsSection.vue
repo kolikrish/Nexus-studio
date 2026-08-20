@@ -1,5 +1,47 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import gsap from 'gsap'
+
+const titleRef = ref(null)
+const hasTitleAnimated = ref(false)
+
+const titleText = "I've had the chance to work with these brands"
+const titleWords = titleText.split(" ")
+
+let titleObserver = null
+
+onMounted(() => {
+  if (!titleRef.value) return
+
+  const wordElements = titleRef.value.querySelectorAll('.brand-title-word-inner')
+
+  gsap.set(wordElements, { y: '-100%', opacity: 0 })
+
+  titleObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasTitleAnimated.value) {
+          hasTitleAnimated.value = true
+          gsap.to(wordElements, {
+            y: '0%',
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.035,
+            ease: 'power3.out',
+          })
+          titleObserver.disconnect()
+        }
+      })
+    },
+    { threshold: 0.2 }
+  )
+
+  titleObserver.observe(titleRef.value)
+})
+
+onBeforeUnmount(() => {
+  if (titleObserver) titleObserver.disconnect()
+})
 
 const brands = [
   { name: 'Picture Organic Clothing', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop' },
@@ -67,8 +109,20 @@ const clearActive = () => {
     @mousemove="handleMouseMove"
   >
     <!-- Section Title -->
-    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-[poppins] text-black tracking-tight mb-12 lg:mb-16">
-      I've had the chance to work with these brands
+    <h2
+      ref="titleRef"
+      data-cursor="text"
+      class="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-[poppins] text-black tracking-tight mb-12 lg:mb-16 flex flex-wrap gap-x-[0.28em] gap-y-1.5"
+    >
+      <span
+        v-for="(word, index) in titleWords"
+        :key="index"
+        class="inline-block overflow-hidden py-1 -my-1"
+      >
+        <span class="brand-title-word-inner inline-block">
+          {{ word }}
+        </span>
+      </span>
     </h2>
 
     <!-- Brands Paragraph / Grid -->
