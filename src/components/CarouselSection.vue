@@ -119,8 +119,8 @@ const moveDragging = (e) => {
     <!-- Automatic Infinite Scrollable Track -->
     <div
       ref="scrollContainer"
+      data-cursor="drag"
       class="flex gap-6 lg:gap-8 overflow-x-auto scrollbar-none px-6 md:px-10 lg:px-12 py-4 cursor-grab active:cursor-grabbing"
-      @mouseenter="isPaused = true"
       @mouseleave="stopDragging"
       @mousedown="startDragging"
       @mouseup="stopDragging"
@@ -132,7 +132,10 @@ const moveDragging = (e) => {
         :class="['flex-none flex flex-col group', item.width]"
       >
         <!-- Video Card Wrapper -->
-        <div :class="['relative w-full bg-black overflow-hidden rounded-xs shadow-md transition-transform duration-300 group-hover:scale-[1.01]', item.aspect]">
+        <div
+          data-cursor="view"
+          :class="['relative w-full bg-black overflow-hidden rounded-xs shadow-md transition-transform duration-300 group-hover:scale-[1.01]', item.aspect]"
+        >
           <video
             class="w-full h-full object-cover pointer-events-none"
             autoplay
@@ -148,7 +151,7 @@ const moveDragging = (e) => {
 
         <!-- Title Below Card -->
         <div class="mt-3.5 text-left">
-          <p class="text-sm md:text-base font-light text-black tracking-tight font-[poppins]">
+          <p data-cursor="text" class="text-sm md:text-base font-light text-black tracking-tight font-[poppins]">
             {{ item.title }}
           </p>
         </div>

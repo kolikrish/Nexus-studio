@@ -105,6 +105,7 @@ onBeforeUnmount(() => {
         v-for="(project, index) in projects"
         :key="project.id"
         :ref="(el) => (cardRefs[index] = el)"
+        data-cursor="view"
         class="group flex flex-col cursor-pointer"
         @mouseenter="playVideo(index)"
         @mouseleave="pauseVideo(index)"
@@ -126,7 +127,7 @@ onBeforeUnmount(() => {
 
         <!-- Meta Text Below -->
         <div class="mt-3.5 flex flex-col text-left">
-          <h3 class="text-base md:text-lg font-medium text-black tracking-tight leading-snug">
+          <h3 data-cursor="text" class="text-base md:text-lg font-medium text-black tracking-tight leading-snug">
             {{ project.title }}
           </h3>
           <p class="text-neutral-400 font-medium text-sm md:text-[15px] tracking-tight mt-0.5">

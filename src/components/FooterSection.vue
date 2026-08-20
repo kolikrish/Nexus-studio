@@ -1,9 +1,16 @@
 <script setup>
+const line1 = "Let's".split('')
+const line2 = "Collaborate!".split('')
+
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
+  if (window.lenis) {
+    window.lenis.scrollTo(0, { duration: 2.2 })
+  } else {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 }
 </script>
 
@@ -12,8 +19,25 @@ const scrollToTop = () => {
     
     <!-- Big Headline -->
     <div class="mb-20 lg:mb-18">
-      <h1 class="text-[64px] sm:text-[100px] md:text-[140px] lg:text-[170px] xl:text-[200px] tracking-tight leading-[0.85] font-[poppins]">
-        Let's<br />Collaborate!
+      <h1 data-cursor="text" class="text-[64px] sm:text-[100px] md:text-[140px] lg:text-[170px] xl:text-[200px] tracking-tight leading-[0.85] font-[poppins] flex flex-col items-start">
+        <span class="inline-flex">
+          <span
+            v-for="(char, index) in line1"
+            :key="'l1-' + index"
+            class="inline-block transition-transform duration-200 ease-out hover:scale-[1.5] origin-center cursor-pointer select-none"
+          >
+            {{ char }}
+          </span>
+        </span>
+        <span class="inline-flex">
+          <span
+            v-for="(char, index) in line2"
+            :key="'l2-' + index"
+            class="inline-block transition-transform duration-200 ease-out hover:scale-[1.5] origin-center cursor-pointer select-none"
+          >
+            {{ char }}
+          </span>
+        </span>
       </h1>
     </div>
 
